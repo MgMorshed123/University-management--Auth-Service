@@ -20,6 +20,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "lint-check": "eslint   --ignore-path .eslintgitignore  --ext .js,.ts .",
+    "prettier-check" : "npx   prettier --write src/app.ts",
+    "lint-fix": "eslint --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node-dev --respawn --transpile-only src/server.ts"
   },
