@@ -1,8 +1,8 @@
 // app.js
-import { Application, Request, Response } from 'express'
+import express, { Application, Request, Response } from 'express'
 
 // Import required modules
-const express = require('express')
+// const express = require('express')
 import cors from 'cors'
 
 const app: Application = express()
