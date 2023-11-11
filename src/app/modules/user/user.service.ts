@@ -8,10 +8,6 @@ import { generateUserId } from "./user.utils";
 
     // auto generated incremental id
     const id =  await  generateUserId()
-
-
-
-
      user.id = id;
 
 
@@ -21,9 +17,6 @@ import { generateUserId } from "./user.utils";
                 user.password= config.DEFAULT_STUDENT_PASSWORD as string
                 
             }
-
-
-
 
      const createdUser = await User.create(user);
      if(!createdUser) {
