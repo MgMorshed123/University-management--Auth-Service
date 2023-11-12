@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import app from './app'
 import config from './config'
-import  logger  from './share/logger';
+import  {logger, errorlogger}  from './share/logger';
 // import logger from './share/logger';
 
 
@@ -16,7 +16,7 @@ async function main() {
     })
   }
    catch (error) {
-    logger.error(error)
+   errorlogger.error(error)
   }
 
 }
