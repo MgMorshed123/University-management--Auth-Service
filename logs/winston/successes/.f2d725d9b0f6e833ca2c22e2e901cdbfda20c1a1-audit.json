@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\morshed\\Desktop\\um\\logs\\winston\\successes\\.f2d725d9b0f6e833ca2c22e2e901cdbfda20c1a1-audit.json",
+    "files": [
+        {
+            "date": 1699767198800,
+            "name": "C:\\Users\\morshed\\Desktop\\um\\logs\\winston\\successes\\ phu-2023-11-12-13-success.log",
+            "hash": "f15589f0f25a6c5507c772aac6bad7efe1369fd53f4353e40d894e33f3b6ee0a"
+        }
+    ],
+    "hashType": "sha256"
+}

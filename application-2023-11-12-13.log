@@ -1,0 +1,24 @@
+{
+  message: 'application connected ',
+  level: 'info',
+  label: 'right meow!',
+  timestamp: '2023-11-12T05:18:21.980Z'
+}
+{
+  message: 'Server is running on port 5000',
+  level: 'info',
+  label: 'right meow!',
+  timestamp: '2023-11-12T05:18:21.999Z'
+}
+{
+  message: 'application connected ',
+  level: 'info',
+  label: 'right meow!',
+  timestamp: '2023-11-12T05:21:43.082Z'
+}
+{
+  message: 'Server is running on port 5000',
+  level: 'info',
+  label: 'right meow!',
+  timestamp: '2023-11-12T05:21:43.100Z'
+}

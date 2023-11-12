@@ -1,16 +1,49 @@
 import path from "path"
+import  { createLogger, format, transports }    from "winston";
+const { combine, timestamp, label, printf , prettyPrint  } = format;
+import  DailyRotateFile from 'winston-daily-rotate-file';
 
-import winston from "winston";
+
+
+// custom log format 
+const myFormat = printf(({ level, message, label, timestamp }) => {
+
+  const date = new Date(timestamp);
+
+  const hour = date.getHours()
+  const minutes = date.getMinutes()
+  const seconds = date.getSeconds();
+
+
+  
+
+
+
+  return `${date.toString()}  ${hour} : ${minutes} : ${seconds} [${label}] ${level}: ${message}`;
+}); 
+
+
 // import { Path } from "mongoose";
-
-const logger = winston.createLogger({
+const logger = createLogger({
     level: 'info',
-    format: winston.format.json(),
-
+    format: combine(
+      label({ label: 'right meow!' }),
+      timestamp(),
+      myFormat,  prettyPrint() 
+    ),
     transports: [
-        new winston.transports.Console(),
-        new winston.transports.File({ 
-          filename : path.join(process.cwd(), 'logs', 'winston', 'success.log') , level : 'info' }),
+        new transports.Console(),
+        
+        new DailyRotateFile({
+          filename : path.join(process.cwd(), 'logs', 'winston','successes', ' phu-%DATE%-success.log') ,
+          datePattern: 'YYYY-MM-DD-HH',
+          zippedArchive: true,
+          maxSize: '20m',
+          maxFiles: '14d'
+        })
+
+     
+          
 
     ],
   });
@@ -20,13 +53,25 @@ const logger = winston.createLogger({
 
 
 
-  const errorlogger = winston.createLogger({
+  const errorlogger = createLogger({
     level: 'error',
-    format: winston.format.json(),
+    format:  combine(
+      label({ label: 'right meow!' }),
+      timestamp(),
+      myFormat
+    ),
     transports: [
-      new winston.transports.Console(),
-      new winston.transports.File({ 
-        filename : path.join(process.cwd(), 'logs', 'winston', 'error.log') , level : 'error' }),
+      new transports.Console(),
+
+      // new transports.File({ 
+      //   filename : path.join(process.cwd(), 'logs', 'winston', 'errors', 'phu-%DATE%-error.log') , level : 'error' }),
+      new DailyRotateFile({
+        filename : path.join(process.cwd(), 'logs', 'winston','successes', ' phu-%DATE%-errors.log') ,
+        datePattern: 'YYYY-MM-DD-HH',
+        zippedArchive: true,
+        maxSize: '20m',
+        maxFiles: '14d'
+      })
   ],
 
   });
