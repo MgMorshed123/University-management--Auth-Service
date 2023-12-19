@@ -1,5 +1,8 @@
 
 import express, { Application, NextFunction, Request, Response, request, response } from 'express'
+import config from '../config';
+import { IGenericErrorMessage } from '../interfaces/error';
+import handleValidationError from '../errors/handleVlidationError';
 
 
   const globalErrorHandler = (err,
@@ -7,9 +10,32 @@ import express, { Application, NextFunction, Request, Response, request, respons
     res :Response, 
     next  : NextFunction) => {
 
-      res.status(400).json({ errr: err});
-      // Use err.message to get the error message
-      next()
+
+
+        let statusCode = 500;
+        let message = 'message went wrong'
+        let errorMessages : IGenericErrorMessage[] = []
+
+
+         if(err.name ="ValidatorError") {
+
+          const simplifiedError = handleValidationError(err)
+
+
+
+         }
+
+
+
+
+      res.status(statusCode).json({ 
+        success :false,
+        message,
+        errorMessages,
+        stack : config.env !== 'production' ? err.stack : undefined
+
+      });
+     
 
   }
 
