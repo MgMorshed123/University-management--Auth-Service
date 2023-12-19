@@ -1,6 +1,5 @@
 // app.js
 import express, { Application, NextFunction, Request, Response, request, response } from 'express'
-import userRouter from  './app/modules/user/user.route'
 
 // Import required modules
 // const express = require('express')
@@ -8,6 +7,7 @@ import cors from 'cors'
 import { error } from 'winston';
 import ApiError from './errors/ApiErrors';
 import globalErrorHandler from './middlewares/globalErrorHandler';
+import { UserRoutes } from './app/modules/user/user.route';
 
 const app: Application = express()
 app.use(express.json());
@@ -21,15 +21,15 @@ app.use(cors())
 }) */
 
 
-app.use("/api/v1/users/",userRouter)
+app.use("/api/v1/users/",UserRoutes)
 
 
 
 
 // custom error
-  // app.get("/", (req : Request , res :Response, next : NextFunction) => {
-  //   throw new ApiError(400, 'ore baba error')
-  // })
+  app.get("/", (req : Request , res :Response, next : NextFunction) => {
+    throw new ApiError(400, 'ore baba error')
+  })
 
 
 

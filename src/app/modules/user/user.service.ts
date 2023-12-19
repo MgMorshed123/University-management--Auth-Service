@@ -31,6 +31,6 @@ import { generateUserId } from "./user.utils";
    }
 
 
-export default {
+export  const UserService = {
     createUser
 }
