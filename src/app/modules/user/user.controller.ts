@@ -1,11 +1,18 @@
 
 import { NextFunction, Request, RequestHandler, Response } from 'express';  
 import { UserService } from './user.service';
+import { createUserZodSchema } from './user.validation';
 
 
 const createUser  : RequestHandler = async (req: Request, res: Response , next : NextFunction) => {
+
     try {
       
+     
+
+
+       await  createUserZodSchema.parseAsync(req)
+
       const { user } = req.body;
   
       if (!user) {
