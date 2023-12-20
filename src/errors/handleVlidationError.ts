@@ -3,8 +3,7 @@ import { IGenericErrorResponse } from '../interfaces/common';
 import { IGenericErrorMessage } from '../interfaces/error';
 
 
-const handleValidationError = (
-    
+const handleValidationError = (  
   error: mongoose.Error.ValidationError
 ): IGenericErrorResponse => {
 
