@@ -8,6 +8,7 @@ import { error } from 'winston';
 import ApiError from './errors/ApiErrors';
 import globalErrorHandler from './middlewares/globalErrorHandler';
 import { UserRoutes } from './app/modules/user/user.route';
+import { AcademicSemesterRoutes } from './app/modules/academicSemester/academicSesmster.Route';
 
 const app: Application = express()
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use(cors())
 
 
 app.use("/api/v1/users/",UserRoutes)
+app.use("/api/v1/create-semsters",AcademicSemesterRoutes)
 
 
 
