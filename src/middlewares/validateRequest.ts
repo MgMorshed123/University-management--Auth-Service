@@ -8,10 +8,8 @@ import { UserService } from '../app/modules/user/user.service';
 import { AnyZodObject, Schema } from 'zod';
 
 const validateRequest = (schema : AnyZodObject)  => async (req: Request, res: Response , next : NextFunction) : Promise<void> => {
-
+  
   try {
-    
-
     await schema.parseAsync({
       body : req.body,
       query : req.query,
@@ -19,11 +17,8 @@ const validateRequest = (schema : AnyZodObject)  => async (req: Request, res: Re
       cookies : req.cookies,
     })
    return next()
-
   } catch (error) {
-    
     next(error)
-    
   }
 };
   

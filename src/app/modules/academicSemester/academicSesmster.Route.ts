@@ -3,8 +3,8 @@ import { AcademicSemesterValidation } from './academicSemester.Validation';
 import validateRequest from '../../../middlewares/validateRequest';
 import { AcademicSemesterController } from './academicSemester.Controller';
 
-// import { UserController } from './user.controller';
 
+// import { UserController } from './user.controller';
 // import { AcademicSemesterController } from './academicSemester.controller';
 // import { AcademicSemesterValidation } from './acdemicSemester.validation';
 

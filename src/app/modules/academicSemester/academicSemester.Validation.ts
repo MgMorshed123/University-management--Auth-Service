@@ -6,7 +6,9 @@ import {
 } from './academic.Semster.constant';
 
 const createAcademicSemesterZodSchema = z.object({
+
   body: z.object({
+    
     title: z.enum([...academicSemesterTitles] as [string, ...string[]], {
       required_error: 'Title is required',
     }),
@@ -21,6 +23,8 @@ const createAcademicSemesterZodSchema = z.object({
       required_error: 'End month is needed',
     }),
   }),
+
+
 });
 
 export const AcademicSemesterValidation = {

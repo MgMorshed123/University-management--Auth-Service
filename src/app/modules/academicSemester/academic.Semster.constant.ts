@@ -19,6 +19,7 @@ import { IAcademicSemesterCodes, IAcademicSemesterMonths, IAcademicSemesterTitle
 
   
   export const acdemicSemesterMonths: IAcademicSemesterMonths[] = [
+
     'January',
     'February',
     'March',
@@ -31,12 +32,16 @@ import { IAcademicSemesterCodes, IAcademicSemesterMonths, IAcademicSemesterTitle
     'October',
     'November',
     'December',
+
   ];
   
   export const academicSemesterTitleCodeMapper: {
+
     [key: string]: string;
   } = {
+
     Autumn: '01',
     Summer: '02',
     Fall: '03',
+    
   };

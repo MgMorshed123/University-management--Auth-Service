@@ -7,6 +7,8 @@ import { AcademicSmester } from './academicSemsterModel';
 const createSemester = async (
   payload: IAcademicSemester
 ): Promise<IAcademicSemester> => {
+
+  
   if (academicSemesterTitleCodeMapper[payload.title] !== payload.code) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid Code');
   }

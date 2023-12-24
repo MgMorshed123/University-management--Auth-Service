@@ -45,17 +45,11 @@ const academicSemesterSchema = new Schema<IAcademicSemester>(
 //  CHECK FOR SAME YEAR SAME SEMESTER 
 
 academicSemesterSchema.pre('save', async function(next){
-
       const isExist = await AcademicSmester.findOne ({ title : this.title, year : this.year }) 
-
       if(isExist){
-
       throw new ApiError(status.CONFLICT, "Academic Semster Already  Exist ")
-
       }
-
       next()
-
 })
 
 
