@@ -10,6 +10,7 @@ import globalErrorHandler from './middlewares/globalErrorHandler';
 import { UserRoutes } from './app/modules/user/user.route';
 import { AcademicSemesterRoutes } from './app/modules/academicSemester/academicSesmster.Route';
 import router from './app/modules/routes';
+import httpStatus from 'http-status';
 
 const app: Application = express()
 app.use(express.json());
@@ -29,7 +30,22 @@ app.use(cors())
 app.use('/api/v1', router)
 
 
+// handle noT Found 
 
+app.use((req :Request,res : Response,next : NextFunction) => {
+
+  res.status(httpStatus.NOT_FOUND).json({
+    success : false,
+    message : 'NOT FOUND ',
+    errorMessages : [
+      {
+        path : '.',
+        message : 'API NOT FOUND',
+      }
+    ]
+  })
+  next()
+})
 
 
 // custom error
