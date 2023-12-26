@@ -6,6 +6,7 @@ import sendResponse from '../../shared/sendResponse';
 import httpStatus from 'http-status';
 import pick from '../../shared/pick';
 import { paginationOptions } from '../../../constant/pagination';
+import { IAcademicSemester } from './academicSemster.interface';
 
 const createSemester= catchAsync(
 
@@ -31,12 +32,8 @@ const createSemester= catchAsync(
       message : 'Academic Semster  created Succefully',
       data: result,
     })
-
       next()
-
   }
-
-
 )
 
 
@@ -60,14 +57,13 @@ const  getAllSemster = catchAsync(
 
 
 
-  const result = await  AcademicSemesterService.getAllSemster(paginationOptions)
+  const result = await  AcademicSemesterService.getAllSemester(paginationOption)
 
   })
 
 
 
-  sendResponse(res, {
-
+  sendResponse<IAcademicSemester> (res, {
     statusCode : httpStatus.OK,
     success : true,
     message : 'Academic Semster  created Succefully',

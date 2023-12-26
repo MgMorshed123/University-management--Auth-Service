@@ -2,8 +2,8 @@
 
 
 export type IPaginationOptions = {
-    page?: Number,
-    limit?: Number,
+    page?: number,
+    limit?: number,
     sortBy?: string,
     sortOrder?: 'asc' | 'desc',
-}
+};
