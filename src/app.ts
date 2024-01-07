@@ -39,7 +39,7 @@ app.use((req :Request,res : Response,next : NextFunction) => {
     message : 'NOT FOUND ',
     errorMessages : [
       {
-        path : '.',
+        path : req.originalUrl,
         message : 'API NOT FOUND',
       }
     ]

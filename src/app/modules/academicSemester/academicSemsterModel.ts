@@ -40,10 +40,9 @@ const academicSemesterSchema = new Schema<IAcademicSemester>(
       timestamps: true,
     }
   );
-
+  
   
 //  CHECK FOR SAME YEAR SAME SEMESTER 
-
 academicSemesterSchema.pre('save', async function(next){
       const isExist = await AcademicSmester.findOne ({ title : this.title, year : this.year }) 
       if(isExist){

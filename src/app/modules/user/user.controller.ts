@@ -8,15 +8,13 @@ import httpStatus from 'http-status';
 
 
 const createUser  = catchAsync(
-
+   
   async (req: Request, res: Response , next : NextFunction) => {
-
-
-    
-    await  createUserZodSchema.parseAsync(req)
-
-   const { user } = req.body;
-
+   
+  await  createUserZodSchema.parseAsync(req)
+  
+  const { user } = req.body;
+   
    if (!user) {
      return res.status(400).json({
        success: false,
@@ -31,20 +29,18 @@ const createUser  = catchAsync(
   //    message: 'Created user successfully',
   //    data: result,
   //  });
-
   sendResponse(res, {
-
-    statusCode : httpStatus.OK,
-    success : true,
-    message : 'User created Succefully',
-
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User created successfully',
     data: result,
-  })
-
-
- }
-
-)
+    meta: {
+      page: 1,
+      limit: 10,
+      total: 100,
+    },
+  });
+ })
   
   
 

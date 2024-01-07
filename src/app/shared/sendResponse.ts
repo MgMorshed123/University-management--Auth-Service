@@ -3,11 +3,10 @@
 import { Response } from "express";
 
 
-type IApiResponse<T> = {
+ export type IApiResponse<T> = {
     statusCode : number;
     success : boolean;
     meta : {
-
         page : number;
         limit : number;
         total : number;
@@ -17,6 +16,7 @@ type IApiResponse<T> = {
 }
  
 const sendResponse = <T> (res : Response, data : IApiResponse<T>) : void=>   {
+
     const responseData :IApiResponse<T> = {
         statusCode : data.statusCode,
         success : data.success,
@@ -26,4 +26,5 @@ const sendResponse = <T> (res : Response, data : IApiResponse<T>) : void=>   {
     }
     res.status(data.statusCode).json(responseData)
 }
+
 export  default sendResponse;
