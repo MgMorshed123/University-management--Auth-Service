@@ -45,3 +45,8 @@ import { IAcademicSemesterCodes, IAcademicSemesterMonths, IAcademicSemesterTitle
     Fall: '03',
     
   };
+
+export   const academisSemesterSearchableFields = ['title', 'code', 'year']
+
+
+export   const academisSemesterFilterableFields = ['searchTerm', 'title', 'code', 'year']

@@ -1,12 +1,15 @@
 import httpStatus from 'http-status';
-import { IAcademicSemester } from './academicSemster.interface';
-import { academicSemesterTitleCodeMapper } from './academic.Semster.constant';
+import { IAcademicSemester, IAcademicSemesterFilters } from './academicSemster.interface';
+import { academicSemesterTitleCodeMapper, academisSemesterSearchableFields } from './academic.Semster.constant';
 import ApiError from '../../../errors/ApiErrors';
 import { AcademicSmester } from './academicSemsterModel';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import { IGenericrResponse } from '../../../interfaces/common';
 import { paginationHelpers } from '../../../helpers/PaginationHelpers';
 import { SortOrder } from "mongoose";
+
+
+
 const createSemester = async (
   payload: IAcademicSemester
 ): Promise<IAcademicSemester> => {
@@ -24,15 +27,92 @@ const createSemester = async (
  
 
 
+const getAllSemester = async (
+  
+  filters :IAcademicSemesterFilters,
+  paginationOption: IPaginationOptions): Promise<IGenericrResponse<IAcademicSemester[]>> => {
 
-const getAllSemester = async (paginationOption: IPaginationOptions): Promise<IGenericrResponse<IAcademicSemester[]>> => {
+   const {searchTerm, ...filtersData} = filters;
+
+
+
+  const andConditions = []
+
+
+   if(searchTerm) {
+
+    andConditions.push({
+
+      $or : academisSemesterSearchableFields.map((field) => ({
+        [field] : {
+          $regex : searchTerm,
+          $option : 'i',
+        }
+      }))
+
+    })
+
+
+   }
+
+
+
+
+   if(Object.keys(filtersData).length){
+    andConditions.push({
+      $and :Object.entries(filtersData).map(([field, value]) =>({
+        [field] : value
+      }))
+    })
+   }
+
+
+
+
+
+  //  const andConditions = [
+
+  //   {
+  //     $or : [
+  //       {
+  //         title : {
+  //           $regex : searchTerm,
+  //           $option : 'i',
+  //         },
+  //       },
+
+  //       {
+  //         code : {
+  //           $regex : searchTerm,
+  //           $option : 'i',
+  //         }
+  //       },
+  //       {
+  //         year : {
+  //           $regex : searchTerm,
+  //           $option : 'i',
+  //         }
+  //       },
+
+
+  //     ]
+  //   }
+  //  ]
+
+
+
+
+
+
+
+
+
 
 
 
     const {  page,  limit,  skip , sortBy, sortOrder  }  = paginationHelpers.calculatePagination(paginationOption)
 
-
-     const sortConditions  : { [key : string] :SortOrder}  = { }
+     const sortConditions  : { [key : string] :SortOrder}  = {}
 
 
      if(sortBy && sortOrder) {
@@ -40,8 +120,12 @@ const getAllSemester = async (paginationOption: IPaginationOptions): Promise<IGe
      }
 
 
+     const whereConditions = andConditions.length > 0 ?   { $and : andConditions} : { };
 
-    const result = await AcademicSmester.find().sort({ year : 'asc'  }).skip(skip).limit(limit);
+
+
+
+    const result = await AcademicSmester.find({$and : andConditions}).sort({ year : 'asc'  }).skip(skip).limit(limit);
 
     const total = await AcademicSmester.countDocuments();
     // 3. Return the result
@@ -57,8 +141,14 @@ const getAllSemester = async (paginationOption: IPaginationOptions): Promise<IGe
 
 
 
+  const getSingleSemester = async (id : string) : Promise<IAcademicSemester | null >  => {
+
+     const result = await AcademicSmester.findById(id);
+     return result;
+  }
 
 export const AcademicSemesterService = {
   createSemester,
-  getAllSemester
+  getAllSemester,
+  getSingleSemester
 };
