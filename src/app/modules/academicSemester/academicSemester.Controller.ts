@@ -11,7 +11,7 @@ import { academisSemesterFilterableFields } from './academic.Semster.constant';
 
 const createSemester= catchAsync(
 
-  async (req: Request, res : Response, next : NextFunction ) => {
+  async (req: Request, res : Response,  ) => {
 
     const { ...academicSemesterData } = req.body;
 
@@ -33,7 +33,7 @@ const createSemester= catchAsync(
       message: 'Aademic semester created successfully!',
       data: result,
     });
-    next();
+   
   });
 
 
@@ -43,7 +43,7 @@ const createSemester= catchAsync(
 
 const  getAllSemster = catchAsync(
 
-  async(req : Request, res : Response, next : NextFunction) => {
+  async(req : Request, res : Response, ) => {
 
    const filters = pick(req.query, academisSemesterFilterableFields)
 
@@ -66,7 +66,7 @@ const  getAllSemster = catchAsync(
 
   const getSingleSemster = catchAsync(
 
-    async(req : Request, res :Response , next: NextFunction) => {
+    async(req : Request, res :Response ) => {
 
       const id = req.params.id;
 
@@ -81,7 +81,7 @@ const  getAllSemster = catchAsync(
         data: result.data,
   
       })
-     next();
+    
     }
     
     );
@@ -92,11 +92,12 @@ const  getAllSemster = catchAsync(
 
 const updateSemester = catchAsync(
 
-  async(req : Request, res :Response , next: NextFunction) => {
+  async(req : Request, res :Response ) => {
 
     const id = req.params.id;
+  const updateOne = req.body;
 
-    const result = await AcademicSemesterService.getSingleSemester(id)
+    const result = await AcademicSemesterService.updateSemester(id, updateOne)
 
 
     sendResponse<IAcademicSemester[]>(res, {
@@ -106,17 +107,36 @@ const updateSemester = catchAsync(
       data: result,
 
     })
-   next();
+  
   }
 
 )
 
+  const deleteSemester = catchAsync(
+
+
+    async(req : Request, res :Response ) => {
+
+      const id = req.params.id;
+ 
   
+      const result = await AcademicSemesterService.deleteSemester(id)
+  
+      sendResponse<IAcademicSemester[]>(res, {
+        statusCode : httpStatus.OK,
+        success: true,
+        message : 'Semester  Deleted SuccessFully',
+        data: result,
+  
+      })
+    }
+  )
 
 
 export const AcademicSemesterController = {
   createSemester,
   getAllSemster,
   getSingleSemster,
-  updateSemester
+  updateSemester,
+  deleteSemester
 };

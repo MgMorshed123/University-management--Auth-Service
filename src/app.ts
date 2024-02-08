@@ -11,6 +11,7 @@ import { UserRoutes } from './app/modules/user/user.route';
 import { AcademicSemesterRoutes } from './app/modules/academicSemester/academicSesmster.Route';
 import router from './app/modules/routes';
 import httpStatus from 'http-status';
+import { generateFacultyId } from './app/modules/user/user.utils';
 
 const app: Application = express()
 app.use(express.json());
@@ -46,6 +47,23 @@ app.use((req :Request,res : Response,next : NextFunction) => {
   })
   next()
 })
+
+
+const academicSemester =  {
+
+  code : '01',
+  year : '2025'
+}
+  
+  const testId = () => {
+    
+    const testId = generateFacultyId()
+    console.log(testId)
+  }
+
+
+  testId()
+
 
 
 // custom error

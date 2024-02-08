@@ -18,13 +18,18 @@ router.post(
 
 router.get('/', AcademicSemesterController.getAllSemster)
 
+router.patch('/:id',
+validateRequest(AcademicSemesterValidation.updateAcademicSemesterZodSchema),
+AcademicSemesterController.updateSemester)
+
+
 
 
 router.get('/id', AcademicSemesterController.getSingleSemster)
 
+router.delete('/:id', AcademicSemesterController.deleteSemester)
 
 
-router.patch('/', AcademicSemesterController.updateSemester)
 
 
 
