@@ -1,7 +1,5 @@
 
 
-
-
 import { NextFunction, Request, RequestHandler, Response } from 'express';  
 import { createUserZodSchema } from '../app/modules/user/user.validation';
 import { UserService } from '../app/modules/user/user.service';

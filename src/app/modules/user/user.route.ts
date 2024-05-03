@@ -7,7 +7,7 @@ import { createUserZodSchema } from './user.validation';
 
 const router = express.Router()
 
-router.post("/create-user",validateRequest(createUserZodSchema) ,UserController.createUser)
+router.post("/create-user",validateRequest(createUserZodSchema),UserController.createUser)
 
 
 export const UserRoutes = router;

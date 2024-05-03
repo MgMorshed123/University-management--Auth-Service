@@ -2,14 +2,8 @@ import { Model, Schema, model } from 'mongoose';
 import { IUser, UserModel } from './user.interface';
 
 
-
-
-
-const userSchema = new Schema<IUser>(
-    
+const userSchema = new Schema<IUser>(    
     {
-
-
     id : {
         type : String,
         required : true,
